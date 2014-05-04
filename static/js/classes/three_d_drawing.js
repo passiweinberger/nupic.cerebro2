@@ -100,10 +100,10 @@ var ThreeDDrawing = AbstractDrawing.extend(function(base) {
 
             for (var i = 0; i < particles.vertices.length; i++) {
                 var column = Math.floor(i / numZ),
-                    color = 0x222222;
+                    color = 0xEEEEEE;
 
                 if (showActiveColumns && _.contains(activeColumns, column)) {
-                    color = 0xFFFFFF;
+                    color = 0x000000;
                 }
 
                 if (showPredictedCells && _.contains(predictedCells, i)) {
@@ -111,7 +111,7 @@ var ThreeDDrawing = AbstractDrawing.extend(function(base) {
                 }
                 
                 if (showActiveCells && _.contains(activeCells, i)) {
-                    color = 0x006400;
+                    color = 0x66CD00;
                 }
 
                 particles.colors[i].setHex(color);
@@ -140,14 +140,13 @@ var ThreeDDrawing = AbstractDrawing.extend(function(base) {
                         permanence = synapse[2],
                         toParticle = particles[toIndex],
                         fromParticle = inputParticles[fromIndex],
-                        toColor = new THREE.Color(0x0000FF).multiplyScalar(permanence),
-                        fromColor = new THREE.Color(0xFF0000).multiplyScalar(permanence);
+                        color = new THREE.Color(0xCD3333).multiplyScalar(1 / permanence);
 
                     geometry.vertices.push(toParticle);
                     geometry.vertices.push(fromParticle);
 
-                    geometry.colors.push(toColor);
-                    geometry.colors.push(fromColor);
+                    geometry.colors.push(color);
+                    geometry.colors.push(color);
                 }
 
                 var line = new THREE.Line(geometry, material, THREE.LinePieces);

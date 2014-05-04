@@ -79,6 +79,7 @@ var AbstractVisualization = Fiber.extend(function() {
             scene.add(camera);
 
             renderer.setSize(width, height);
+            renderer.setClearColor(0xFFFFFF, 1);
             this.container.append(renderer.domElement);
 
             this.renderer = renderer;

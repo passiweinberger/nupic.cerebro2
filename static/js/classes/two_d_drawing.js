@@ -95,17 +95,17 @@ var TwoDDrawing = AbstractDrawing.extend(function(base) {
                 showPredictedCells = this.showPredictedCells;
 
             for (var i = 0; i < particles.vertices.length; i++) {
-                var color = 0x222222;
+                var color = 0xEEEEEE;
 
                 if (showActiveColumns && _.contains(activeColumns, i)) {
-                    color = 0xFFFFFF;
+                    color = 0x000000;
                 }
 
                 for (var j = 0; j < numZ; j++) {
                     var cell = i * numZ + j;
 
                     if (showActiveCells && _.contains(activeCells, cell)) {
-                        color = 0x006400;
+                        color = 0x66CD00;
                     }
                     else if (showPredictedCells && _.contains(predictedCells, cell)) {
                         color = 0xAA0000;
