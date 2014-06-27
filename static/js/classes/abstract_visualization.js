@@ -130,33 +130,34 @@ var AbstractVisualization = Fiber.extend(function() {
         },
 
         play: function() {
-            if (!this.playing) {
-                this._enableController('pause');
-                this._player();
-                this.playing = true;
-                this._changeControllerText("play", "pause");
-            } else {
-                this.pause();
-            }
+            if (!this.playing && this._checkControllerState("play")) {
+                  this.playing = true;
+                  this._changeControllerText("play", "pause");
+                  this._player();
+              } else {
+                  this.pause();
+              }
         },
 
         pause: function() {
             clearTimeout(this.timer);
             this.playing = false;
-            this._changeControllerText("play", "play");
+            if (this._checkControllerState("play")) {
+                this._changeControllerText("play", "play");
+            }
         },
 
         /* Private */
 
         _player: function() {
-            this.timer = _.delay(function(_this){
-                _this.iteration++;
-                if(_this.iteration < _this.guiIteration.__max) {
+            if (this.iteration < this.guiIteration.__max) {
+                this.timer = _.delay(function(_this){
+                    _this.iteration++;
                     _this._player();
-                } else {
-                    _this.pause();
-                }
-            }, this._calculateSpeed(),this);
+                }, this._calculateSpeed(), this);
+            } else {
+                this.pause();
+            }
         },
 
         _changeControllerText: function(name, label) {
@@ -206,9 +207,9 @@ var AbstractVisualization = Fiber.extend(function() {
 
         _disableController: function(controllerName) {
             var controller = this._findController(controllerName);
-            if (!controller) return;
-
-            if($(controller.__li).children(".disabled").length > 0) return;
+            if (!controller || $(controller.__li).children(".disabled").length > 0) {
+                return;
+            }
             $(controller.__li).append("<div class='disabled'></div>");
         },
 
@@ -224,6 +225,14 @@ var AbstractVisualization = Fiber.extend(function() {
             if (!controller) return;
 
             $(controller.__li).addClass("hidden");
+        },
+
+        _checkControllerState: function(controllerName) {
+            var controller = this._findController(controllerName);
+            if (!controller || $(controller.__li).children(".disabled").length > 0) {
+                return false;
+            }
+            return true;
         },
 
         _hideFolder: function(folderName) {
@@ -306,6 +315,7 @@ var AbstractVisualization = Fiber.extend(function() {
             if (this.lastIteration != this.iteration) {
                 this._iterationChanged();
                 this.lastIteration = this.iteration;
+                this._setButtonState();
             }
         },
 
@@ -337,6 +347,26 @@ var AbstractVisualization = Fiber.extend(function() {
             this.iterationChanged(snapshot, lastSnapshot); // fire public event
         },
 
+        _setButtonState: function() {
+            if (this.guiIteration) {
+                // if counter is at max:
+                if (this.iteration >= this.guiIteration.__max) {
+                    this._disableController("play");
+                    this._disableController("next");
+                    this._enableController("prev");
+                // if counter is at min:
+                } else if (this.iteration <= this.guiIteration.__min) {
+                    this._enableController("play");
+                    this._enableController("next");
+                    this._disableController("prev");
+                } else {
+                    this._enableController("play");
+                    this._enableController("next");
+                    this._enableController("prev"); 
+                }
+            }
+        },
+        
         _updateFOV: function(value) {
             this.camera.fov = value;
             this.camera.updateProjectionMatrix();
