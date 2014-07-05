@@ -130,7 +130,7 @@ var AbstractVisualization = Fiber.extend(function() {
         },
 
         play: function() {
-            if (!this.playing && this._checkControllerState("play")) {
+            if (!this.playing && this._isControllerEnabled("play")) {
                   this.playing = true;
                   this._changeControllerText("play", "pause");
                   this._player();
@@ -142,7 +142,7 @@ var AbstractVisualization = Fiber.extend(function() {
         pause: function() {
             clearTimeout(this.timer);
             this.playing = false;
-            if (this._checkControllerState("play")) {
+            if (this._isControllerEnabled("play")) {
                 this._changeControllerText("play", "play");
             }
         },
@@ -227,7 +227,7 @@ var AbstractVisualization = Fiber.extend(function() {
             $(controller.__li).addClass("hidden");
         },
 
-        _checkControllerState: function(controllerName) {
+        _isControllerEnabled: function(controllerName) {
             var controller = this._findController(controllerName);
             if (!controller || $(controller.__li).children(".disabled").length > 0) {
                 return false;
