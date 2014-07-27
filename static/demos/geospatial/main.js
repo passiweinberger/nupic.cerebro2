@@ -6,9 +6,9 @@ var loadDelay = intParam('loadDelay') || 0,
 
 var container = $('#container');
 
-var model = new NetworkReadonlyModel(modelURL),
-    history = new History(),
-    visualization = new FakeGeospatialCoordinateEncoderVisualization(container, history, encoderName);
+var model = new Cerebro2.NetworkReadonlyModel(modelURL),
+    history = new Cerebro2.History(),
+    visualization = new Cerebro2.FakeGeospatialCoordinateEncoderVisualization(container, history, encoderName);
 
 visualization.loadDelay = loadDelay;
 visualization.render();

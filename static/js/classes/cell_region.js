@@ -1,4 +1,4 @@
-var CellRegion = AbstractRegion.extend(function() {
+Cerebro2.CellRegion = Cerebro2.AbstractRegion.extend(function() {
     return {
         init: function(dimensions) {
             this.dimensions = dimensions;

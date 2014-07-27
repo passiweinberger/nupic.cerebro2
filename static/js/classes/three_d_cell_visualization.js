@@ -1,4 +1,4 @@
-var ThreeDCellVisualization = CellVisualization.extend(function(base) {
+Cerebro2.ThreeDCellVisualization = Cerebro2.CellVisualization.extend(function(base) {
     return {
         initRenderer: function() {
             var renderer = base.initRenderer.call(this);
@@ -32,11 +32,11 @@ var ThreeDCellVisualization = CellVisualization.extend(function(base) {
         },
 
         getInputDrawing: function() {
-            return new ThreeDCellDrawing();
+            return new Cerebro2.ThreeDCellDrawing();
         },
 
         getOutputDrawing: function() {
-            return new ThreeDCellDrawing();
+            return new Cerebro2.ThreeDCellDrawing();
         },
 
         positionDrawings: function(inputDrawing, outputDrawing) {

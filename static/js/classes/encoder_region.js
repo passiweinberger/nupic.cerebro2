@@ -1,4 +1,4 @@
-var EncoderRegion = AbstractRegion.extend(function() {
+Cerebro2.EncoderRegion = Cerebro2.AbstractRegion.extend(function() {
     return {
         init: function(name, params) {
             this.name = name;

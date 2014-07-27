@@ -1,4 +1,4 @@
-var History = Fiber.extend(function() {
+Cerebro2.History = Fiber.extend(function() {
     return {
         init: function() {
             this.snapshots = [];

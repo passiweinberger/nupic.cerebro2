@@ -1,4 +1,4 @@
-var NetworkReadonlyModel = AbstractModel.extend(function(base) {
+Cerebro2.NetworkReadonlyModel = Cerebro2.AbstractModel.extend(function(base) {
     return {
         init: function(modelURL) {
             base.init.call(this);
@@ -61,13 +61,13 @@ var NetworkReadonlyModel = AbstractModel.extend(function(base) {
 
             var iteration = this.numSnapshots + 1,
                 modelURL = this.modelURL,
-                snapshot = new Snapshot();
+                snapshot = new Cerebro2.Snapshot();
 
-            var inputCellRegion = new NetworkCellRegion(inputDimensions,
+            var inputCellRegion = new Cerebro2.NetworkCellRegion(inputDimensions,
                                                         "input",
                                                         iteration,
                                                         modelURL),
-                outputCellRegion = new NetworkCellRegion(outputDimensions,
+                outputCellRegion = new Cerebro2.NetworkCellRegion(outputDimensions,
                                                          "output",
                                                          iteration,
                                                          modelURL);
@@ -95,4 +95,4 @@ var NetworkReadonlyModel = AbstractModel.extend(function(base) {
     };
 });
 
-Fiber.mixin(NetworkReadonlyModel, NetworkMixin);
+Fiber.mixin(Cerebro2.NetworkReadonlyModel, Cerebro2.NetworkMixin);

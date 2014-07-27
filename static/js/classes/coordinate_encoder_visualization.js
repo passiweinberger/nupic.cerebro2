@@ -1,4 +1,4 @@
-var CoordinateEncoderVisualization = EncoderVisualization.extend(function(base) {
+Cerebro2.CoordinateEncoderVisualization = Cerebro2.EncoderVisualization.extend(function(base) {
     return {
         init: function(container, history, name) {
             this.name = name;
@@ -6,7 +6,7 @@ var CoordinateEncoderVisualization = EncoderVisualization.extend(function(base) 
 
             base.init.call(this, container, history, name);
 
-            this.coordinateDrawing = new CoordinateSystemDrawing();
+            this.coordinateDrawing = new Cerebro2.CoordinateSystemDrawing();
             this.grid = null;
         },
 

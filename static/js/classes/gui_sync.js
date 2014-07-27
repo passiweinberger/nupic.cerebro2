@@ -1,5 +1,5 @@
 /* Keeps Visualizations in sync */
-var GUISync = Fiber.extend(function() {
+Cerebro2.GUISync = Fiber.extend(function() {
     return {
         init: function(master) {
             this.master = master;

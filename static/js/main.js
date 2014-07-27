@@ -1,46 +1,44 @@
 /* Main */
 
-var loadDelay = intParam('loadDelay') || 0,
-    modelURL = strParam('modelURL') || defaultModelURL();
+Cerebro2.loadDelay = intParam('loadDelay') || 0;
+Cerebro2.modelURL = strParam('modelURL') || defaultModelURL();
 
-var container3D = $('#container-3D'),
-    container2D = $('#container-2D');
+Cerebro2.container3D = $('#container-3D');
+Cerebro2.container2D = $('#container-2D');
+Cerebro2.history = new Cerebro2.History();
+Cerebro2.visualization3D = new Cerebro2.ThreeDCellVisualization(Cerebro2.container3D, Cerebro2.history);
+Cerebro2.visualization2D = new Cerebro2.TwoDCellVisualization(Cerebro2.container2D, Cerebro2.history);
 
-var model = new NetworkReadonlyModel(modelURL),
-    history = new History(),
-    visualization3D = new ThreeDCellVisualization(container3D, history),
-    visualization2D = new TwoDCellVisualization(container2D, history);
+Cerebro2.visualization3D.loadDelay = Cerebro2.loadDelay;
+Cerebro2.visualization3D.render();
 
-visualization3D.loadDelay = loadDelay;
-visualization3D.render();
+Cerebro2.visualization2D.loadDelay = Cerebro2.loadDelay;
+Cerebro2.visualization2D.render();
 
-visualization2D.loadDelay = loadDelay;
-visualization2D.render();
-
-var sync = new GUISync(visualization3D);
-sync.addChild(visualization2D);
-
-runModel();
+Cerebro2.sync = new Cerebro2.GUISync(Cerebro2.visualization3D);
+Cerebro2.sync.addChild(Cerebro2.visualization2D);
 
 /* Functions */
 
-function runModel() {
-    model.getNextSnapshot(function(error, snapshot) {
+Cerebro2.runModel = function () {
+    Cerebro2.model.getNextSnapshot(function(error, snapshot) {
         var delay = 1000;
 
         if (snapshot) {
-            history.addSnapshot(snapshot);
-            visualization3D.historyUpdated();
-            visualization2D.historyUpdated();
+            Cerebro2.history.addSnapshot(snapshot);
+            Cerebro2.visualization3D.historyUpdated();
+            Cerebro2.visualization2D.historyUpdated();
 
             delay = 0;
         }
 
         setTimeout(function() {
-            runModel();
+            Cerebro2.runModel();
         }, delay);
     });
-}
+};
+
+Cerebro2.runModel();
 
 /* Utilities */
 

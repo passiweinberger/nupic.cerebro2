@@ -1,4 +1,4 @@
-var CellDrawing = AbstractDrawing.extend(function(base) {
+Cerebro2.CellDrawing = Cerebro2.AbstractDrawing.extend(function(base) {
     return {
         init: function() {
             base.init.call(this);

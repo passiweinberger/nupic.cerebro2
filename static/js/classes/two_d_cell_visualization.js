@@ -1,4 +1,4 @@
-var TwoDCellVisualization = CellVisualization.extend(function(base) {
+Cerebro2.TwoDCellVisualization = Cerebro2.CellVisualization.extend(function(base) {
     return {
         initRenderer: function() {
             var renderer = base.initRenderer.call(this);
@@ -27,11 +27,11 @@ var TwoDCellVisualization = CellVisualization.extend(function(base) {
         },
 
         getInputDrawing: function() {
-            return new TwoDCellDrawing();
+            return new Cerebro2.TwoDCellDrawing();
         },
 
         getOutputDrawing: function() {
-            return new TwoDCellDrawing();
+            return new Cerebro2.TwoDCellDrawing();
         },
 
         positionDrawings: function(inputDrawing, outputDrawing) {

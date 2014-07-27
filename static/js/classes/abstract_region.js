@@ -1,4 +1,4 @@
-var AbstractRegion = Fiber.extend(function() {
+Cerebro2.AbstractRegion = Fiber.extend(function() {
     return {
         init: function() {},
     };

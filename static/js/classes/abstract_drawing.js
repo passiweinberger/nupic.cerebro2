@@ -1,4 +1,4 @@
-var AbstractDrawing = Fiber.extend(function() {
+Cerebro2.AbstractDrawing = Fiber.extend(function() {
     return {
         init: function() {
             this.object3D = new THREE.Object3D();

@@ -1,4 +1,4 @@
-var AbstractModel = Fiber.extend(function() {
+Cerebro2.AbstractModel = Fiber.extend(function() {
     return {
         init: function() {},
 
