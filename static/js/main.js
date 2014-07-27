@@ -5,6 +5,8 @@ Cerebro2.modelURL = strParam('modelURL') || defaultModelURL();
 
 Cerebro2.container3D = $('#container-3D');
 Cerebro2.container2D = $('#container-2D');
+
+Cerebro2.model = new Cerebro2.NetworkReadonlyModel(Cerebro2.modelURL);
 Cerebro2.history = new Cerebro2.History();
 Cerebro2.visualization3D = new Cerebro2.ThreeDCellVisualization(Cerebro2.container3D, Cerebro2.history);
 Cerebro2.visualization2D = new Cerebro2.TwoDCellVisualization(Cerebro2.container2D, Cerebro2.history);

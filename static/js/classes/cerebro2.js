@@ -1,1 +1,1 @@
-var Cerebro2 = {};
+var Cerebro2 = Cerebro2 || {};
