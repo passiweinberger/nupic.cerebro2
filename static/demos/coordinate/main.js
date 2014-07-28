@@ -1,49 +1,53 @@
 /* Main */
 
-var loadDelay = intParam('loadDelay') || 0,
-    modelURL = strParam('modelURL') || defaultModelURL(),
-    encoderName = strParam('encoderName') || "coordinate";
+(function() {
 
-var container = $('#container');
+    var loadDelay = intParam('loadDelay') || 0,
+        modelURL = strParam('modelURL') || defaultModelURL(),
+        encoderName = strParam('encoderName') || "coordinate";
 
-var model = new Cerebro2.NetworkReadonlyModel(modelURL),
-    history = new Cerebro2.History(),
-    visualization = new Cerebro2.CoordinateEncoderVisualization(container, history, encoderName);
+    var container = $('#container');
 
-visualization.loadDelay = loadDelay;
-visualization.render();
+    var model = new Cerebro2.NetworkReadonlyModel(modelURL),
+        history = new Cerebro2.History(),
+        visualization = new Cerebro2.CoordinateEncoderVisualization(container, history, encoderName);
 
-runModel();
+    visualization.loadDelay = loadDelay;
+    visualization.render();
 
-/* Functions */
+    runModel();
 
-function runModel() {
-    model.getNextSnapshot(function(error, snapshot) {
-        var delay = 1000;
+    /* Functions */
 
-        if (snapshot) {
-            history.addSnapshot(snapshot);
-            visualization.historyUpdated();
+    function runModel() {
+        model.getNextSnapshot(function(error, snapshot) {
+            var delay = 1000;
 
-            delay = 0;
-        }
+            if (snapshot) {
+                history.addSnapshot(snapshot);
+                visualization.historyUpdated();
 
-        setTimeout(function() {
-            runModel();
-        }, delay);
-    });
-}
+                delay = 0;
+            }
 
-/* Utilities */
+            setTimeout(function() {
+                runModel();
+            }, delay);
+        });
+    }
 
-function intParam(key) {
-    return Number(strParam(key));
-}
+    /* Utilities */
 
-function strParam(key) {
-    return $.url().fparam(key);
-}
+    function intParam(key) {
+        return Number(strParam(key));
+    }
 
-function defaultModelURL() {
-    return "http://" + window.location.hostname + ":9090/_model";
-}
+    function strParam(key) {
+        return $.url().fparam(key);
+    }
+
+    function defaultModelURL() {
+        return "http://" + window.location.hostname + ":9090/_model";
+    }
+
+}());
