@@ -64,13 +64,13 @@ Cerebro2.NetworkReadonlyModel = Cerebro2.AbstractModel.extend(function(base) {
                 snapshot = new Cerebro2.Snapshot();
 
             var inputCellRegion = new Cerebro2.NetworkCellRegion(inputDimensions,
-                                                        "input",
-                                                        iteration,
-                                                        modelURL),
+                                                                 "input",
+                                                                 iteration,
+                                                                 modelURL),
                 outputCellRegion = new Cerebro2.NetworkCellRegion(outputDimensions,
-                                                         "output",
-                                                         iteration,
-                                                         modelURL);
+                                                                  "output",
+                                                                  iteration,
+                                                                  modelURL);
 
             snapshot.setInputCellRegion(inputCellRegion);
             snapshot.setOutputCellRegion(outputCellRegion);
@@ -80,7 +80,7 @@ Cerebro2.NetworkReadonlyModel = Cerebro2.AbstractModel.extend(function(base) {
                     name = encoder.name,
                     cls = encoder.cls,
                     params = encoder.parameters,
-                    regionClass = window["Network" + cls + "Region"] || NetworkEncoderRegion,
+                    regionClass = window["Network" + cls + "Region"] || Cerebro2.NetworkEncoderRegion,
                     encoderRegion = new regionClass(name,
                                                     params,
                                                     iteration,
