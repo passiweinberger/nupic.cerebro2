@@ -1,4 +1,4 @@
-var EncoderVisualization = AbstractVisualization.extend(function(base) {
+Cerebro2.EncoderVisualization = Cerebro2.AbstractVisualization.extend(function(base) {
     return {
         init: function(container, history, name) {
             this.name = name;

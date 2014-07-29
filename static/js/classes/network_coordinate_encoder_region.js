@@ -1,4 +1,4 @@
-var NetworkCoordinateEncoderRegion = NetworkEncoderRegion.extend(function(base) {
+Cerebro2.NetworkCoordinateEncoderRegion = Cerebro2.NetworkEncoderRegion.extend(function(base) {
     return {
         /* Public */
 
@@ -12,4 +12,4 @@ var NetworkCoordinateEncoderRegion = NetworkEncoderRegion.extend(function(base) 
     };
 });
 
-Fiber.mixin(NetworkCoordinateEncoderRegion, NetworkMixin);
+Fiber.mixin(Cerebro2.NetworkCoordinateEncoderRegion, Cerebro2.NetworkMixin);

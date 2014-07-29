@@ -1,4 +1,4 @@
-var Snapshot = Fiber.extend(function() {
+Cerebro2.Snapshot = Fiber.extend(function() {
     return {
         init: function() {
             this.encoders = {};

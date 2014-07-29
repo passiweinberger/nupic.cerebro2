@@ -1,4 +1,4 @@
-var NetworkReadonlyModel = AbstractModel.extend(function(base) {
+Cerebro2.NetworkReadonlyModel = Cerebro2.AbstractModel.extend(function(base) {
     return {
         init: function(modelURL) {
             base.init.call(this);
@@ -61,16 +61,16 @@ var NetworkReadonlyModel = AbstractModel.extend(function(base) {
 
             var iteration = this.numSnapshots + 1,
                 modelURL = this.modelURL,
-                snapshot = new Snapshot();
+                snapshot = new Cerebro2.Snapshot();
 
-            var inputCellRegion = new NetworkCellRegion(inputDimensions,
-                                                        "input",
-                                                        iteration,
-                                                        modelURL),
-                outputCellRegion = new NetworkCellRegion(outputDimensions,
-                                                         "output",
-                                                         iteration,
-                                                         modelURL);
+            var inputCellRegion = new Cerebro2.NetworkCellRegion(inputDimensions,
+                                                                 "input",
+                                                                 iteration,
+                                                                 modelURL),
+                outputCellRegion = new Cerebro2.NetworkCellRegion(outputDimensions,
+                                                                  "output",
+                                                                  iteration,
+                                                                  modelURL);
 
             snapshot.setInputCellRegion(inputCellRegion);
             snapshot.setOutputCellRegion(outputCellRegion);
@@ -80,7 +80,7 @@ var NetworkReadonlyModel = AbstractModel.extend(function(base) {
                     name = encoder.name,
                     cls = encoder.cls,
                     params = encoder.parameters,
-                    regionClass = window["Network" + cls + "Region"] || NetworkEncoderRegion,
+                    regionClass = window["Network" + cls + "Region"] || Cerebro2.NetworkEncoderRegion,
                     encoderRegion = new regionClass(name,
                                                     params,
                                                     iteration,
@@ -95,4 +95,4 @@ var NetworkReadonlyModel = AbstractModel.extend(function(base) {
     };
 });
 
-Fiber.mixin(NetworkReadonlyModel, NetworkMixin);
+Fiber.mixin(Cerebro2.NetworkReadonlyModel, Cerebro2.NetworkMixin);

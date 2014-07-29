@@ -1,57 +1,61 @@
 /* Main */
 
-var loadDelay = intParam('loadDelay') || 0,
-    modelURL = strParam('modelURL') || defaultModelURL();
+(function() {
 
-var container3D = $('#container-3D'),
-    container2D = $('#container-2D');
+    var loadDelay = intParam('loadDelay') || 0,
+        modelURL = strParam('modelURL') || defaultModelURL();
 
-var model = new NetworkReadonlyModel(modelURL),
-    history = new History(),
-    visualization3D = new ThreeDCellVisualization(container3D, history),
-    visualization2D = new TwoDCellVisualization(container2D, history);
+    var container3D = $('#container-3D'),
+        container2D = $('#container-2D');
 
-visualization3D.loadDelay = loadDelay;
-visualization3D.render();
+    var model = new Cerebro2.NetworkReadonlyModel(modelURL),
+        history = new Cerebro2.History(),
+        visualization3D = new Cerebro2.ThreeDCellVisualization(container3D, history),
+        visualization2D = new Cerebro2.TwoDCellVisualization(container2D, history);
 
-visualization2D.loadDelay = loadDelay;
-visualization2D.render();
+    visualization3D.loadDelay = loadDelay;
+    visualization3D.render();
 
-var sync = new GUISync(visualization3D);
-sync.addChild(visualization2D);
+    visualization2D.loadDelay = loadDelay;
+    visualization2D.render();
 
-runModel();
+    var sync = new Cerebro2.GUISync(visualization3D);
+    sync.addChild(visualization2D);
 
-/* Functions */
+    runModel();
 
-function runModel() {
-    model.getNextSnapshot(function(error, snapshot) {
-        var delay = 1000;
+    /* Functions */
 
-        if (snapshot) {
-            history.addSnapshot(snapshot);
-            visualization3D.historyUpdated();
-            visualization2D.historyUpdated();
+    function runModel() {
+        model.getNextSnapshot(function(error, snapshot) {
+            var delay = 1000;
 
-            delay = 0;
-        }
+            if (snapshot) {
+                history.addSnapshot(snapshot);
+                visualization3D.historyUpdated();
+                visualization2D.historyUpdated();
 
-        setTimeout(function() {
-            runModel();
-        }, delay);
-    });
-}
+                delay = 0;
+            }
 
-/* Utilities */
+            setTimeout(function() {
+                runModel();
+            }, delay);
+        });
+    }
 
-function intParam(key) {
-    return Number(strParam(key));
-}
+    /* Utilities */
 
-function strParam(key) {
-    return $.url().fparam(key);
-}
+    function intParam(key) {
+        return Number(strParam(key));
+    }
 
-function defaultModelURL() {
-    return "http://" + window.location.hostname + ":9090/_model";
-}
+    function strParam(key) {
+        return $.url().fparam(key);
+    }
+
+    function defaultModelURL() {
+        return "http://" + window.location.hostname + ":9090/_model";
+    }
+
+}());

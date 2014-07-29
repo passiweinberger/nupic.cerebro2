@@ -1,4 +1,4 @@
-var NetworkCellRegion = CellRegion.extend(function(base) {
+Cerebro2.NetworkCellRegion = Cerebro2.CellRegion.extend(function(base) {
     return {
         init: function(dimensions, region, iteration, modelURL) {
             base.init.call(this, dimensions);
@@ -58,4 +58,4 @@ var NetworkCellRegion = CellRegion.extend(function(base) {
     };
 });
 
-Fiber.mixin(NetworkCellRegion, NetworkMixin);
+Fiber.mixin(Cerebro2.NetworkCellRegion, Cerebro2.NetworkMixin);

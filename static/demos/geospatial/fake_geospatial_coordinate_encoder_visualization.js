@@ -1,4 +1,4 @@
-var FakeGeospatialCoordinateEncoderVisualization = CoordinateEncoderVisualization.extend(function(base) {
+Cerebro2.FakeGeospatialCoordinateEncoderVisualization = Cerebro2.CoordinateEncoderVisualization.extend(function(base) {
     return {
         init: function(container, history, name) {
             base.init.call(this, container, history, name);

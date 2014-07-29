@@ -1,4 +1,4 @@
-var CoordinateEncoderRegion = EncoderRegion.extend(function() {
+Cerebro2.CoordinateEncoderRegion = Cerebro2.EncoderRegion.extend(function() {
     return {
         /* Public */
 

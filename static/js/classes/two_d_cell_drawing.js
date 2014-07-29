@@ -1,4 +1,4 @@
-var TwoDCellDrawing = CellDrawing.extend(function(base) {
+Cerebro2.TwoDCellDrawing = Cerebro2.CellDrawing.extend(function(base) {
     return {
         init: function() {
             base.init.call(this);

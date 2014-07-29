@@ -1,4 +1,4 @@
-var NetworkEncoderRegion = EncoderRegion.extend(function(base) {
+Cerebro2.NetworkEncoderRegion = Cerebro2.EncoderRegion.extend(function(base) {
     return {
         init: function(name, params, iteration, modelURL) {
             base.init.call(this, name, params);
@@ -30,4 +30,4 @@ var NetworkEncoderRegion = EncoderRegion.extend(function(base) {
     };
 });
 
-Fiber.mixin(NetworkEncoderRegion, NetworkMixin);
+Fiber.mixin(Cerebro2.NetworkEncoderRegion, Cerebro2.NetworkMixin);

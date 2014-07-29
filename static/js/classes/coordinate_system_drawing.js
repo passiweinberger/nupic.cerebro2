@@ -1,4 +1,4 @@
-var CoordinateSystemDrawing = AbstractDrawing.extend(function(base) {
+Cerebro2.CoordinateSystemDrawing = Cerebro2.AbstractDrawing.extend(function(base) {
     return {
         init: function() {
             base.init.call(this);

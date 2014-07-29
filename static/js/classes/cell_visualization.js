@@ -1,4 +1,4 @@
-var CellVisualization = AbstractVisualization.extend(function(base) {
+Cerebro2.CellVisualization = Cerebro2.AbstractVisualization.extend(function(base) {
     return {
         init: function(container, history) {
             this.reshape = true;

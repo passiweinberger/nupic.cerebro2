@@ -1,4 +1,4 @@
-var AbstractVisualization = Fiber.extend(function() {
+Cerebro2.AbstractVisualization = Fiber.extend(function() {
     return {
         init: function(container, history) {
             this.container = container;
