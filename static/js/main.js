@@ -10,21 +10,31 @@
 
     var model = new Cerebro2.NetworkReadonlyModel(modelURL),
         history = new Cerebro2.History(),
-        visualization3D = new Cerebro2.ThreeDCellVisualization(container3D, history),
-        visualization2D = new Cerebro2.TwoDCellVisualization(container2D, history);
+        sync = new Cerebro2.GUISync(),
+        historyConsumers = [];
 
-    visualization3D.loadDelay = loadDelay;
-    visualization3D.render();
+    addVisualization(Cerebro2.ThreeDCellVisualization, container3D,
+        function(threeDVis) { sync.listenToMaster(threeDVis); });
 
-    visualization2D.loadDelay = loadDelay;
-    visualization2D.render();
-
-    var sync = new Cerebro2.GUISync(visualization3D);
-    sync.addChild(visualization2D);
+    addVisualization(Cerebro2.TwoDCellVisualization, container2D,
+        function(twoDVis) { sync.addChild(twoDVis); });
 
     runModel();
 
     /* Functions */
+
+    function addVisualization(Visualization, container, onsuccess) {
+        try {
+            var visualization = new Visualization(container, history);
+            visualization.loadDelay = loadDelay;
+            visualization.render();
+            historyConsumers.push(visualization);
+            onsuccess(visualization);
+        }
+        catch (e) {
+            container.text(e);
+        }
+    }
 
     function runModel() {
         model.getNextSnapshot(function(error, snapshot) {
@@ -32,8 +42,9 @@
 
             if (snapshot) {
                 history.addSnapshot(snapshot);
-                visualization3D.historyUpdated();
-                visualization2D.historyUpdated();
+                historyConsumers.forEach(
+                    function (consumer) { consumer.historyUpdated(); }
+                    );
 
                 delay = 0;
             }

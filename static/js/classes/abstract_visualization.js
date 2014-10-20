@@ -48,10 +48,18 @@ Cerebro2.AbstractVisualization = Fiber.extend(function() {
         /* Public */
 
         initRenderer: function() {
-            var renderer = new THREE.WebGLRenderer({
-                // NOTE: uncomment below enable screenshots
-                // preserveDrawingBuffer: true
-            });
+            try {
+                var renderer = new THREE.WebGLRenderer({
+                    // NOTE: uncomment below enable screenshots
+                    // preserveDrawingBuffer: true
+                });
+            }
+            catch (e) {
+                // three.js doesn't throw an informative error message.
+                // It just dereferences null.
+                throw ("Failed to create WebGLRenderer.");
+            }
+
             THREEx.Screenshot.bindKey(renderer);
             return renderer;
         },

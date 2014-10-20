@@ -2,9 +2,14 @@
 Cerebro2.GUISync = Fiber.extend(function() {
     return {
         init: function(master) {
-            this.master = master;
             this.children = [];
+            if (master) {
+                this.listenToMaster(master);
+            }
+        },
 
+        listenToMaster: function(master) {
+            this.master = master;
             this._listenForEvents();
         },
 
