@@ -55,7 +55,7 @@
     }
 
     function defaultModelURL() {
-        return "http://" + window.location.hostname + ":9090/_model";
+        return "http://" + window.location.hostname + ":8080/_model";
     }
 
 }());
