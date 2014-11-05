@@ -23,13 +23,13 @@
 
     /* Functions */
 
-    function addVisualization(Visualization, container, onsuccess) {
+    function addVisualization(VisualizationClass, container, successCallback) {
         try {
-            var visualization = new Visualization(container, history);
+            var visualization = new VisualizationClass(container, history);
             visualization.loadDelay = loadDelay;
             visualization.render();
             historyConsumers.push(visualization);
-            onsuccess(visualization);
+            successCallback(visualization);
         }
         catch (e) {
             container.text(e);
@@ -44,7 +44,7 @@
                 history.addSnapshot(snapshot);
                 historyConsumers.forEach(
                     function (consumer) { consumer.historyUpdated(); }
-                    );
+                );
 
                 delay = 0;
             }
