@@ -28,13 +28,19 @@ Cerebro2.AbstractVisualization = Fiber.extend(function() {
 
             this.loadTimeout = null;
 
-            this._initScene();
-            this._initControls();
-            this._initStats();
+            try {
+                this._initScene();
+                this._initControls();
+                this._initStats();
 
-            this.initGUI();
+                this.initGUI();
 
-            this.historyUpdated();
+                this.historyUpdated();
+            }
+            catch (e) {
+                container.text(e);
+                throw e;
+            }
         },
 
         /* To Override */
