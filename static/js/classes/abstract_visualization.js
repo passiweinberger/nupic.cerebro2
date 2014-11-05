@@ -28,13 +28,19 @@ Cerebro2.AbstractVisualization = Fiber.extend(function() {
 
             this.loadTimeout = null;
 
-            this._initScene();
-            this._initControls();
-            this._initStats();
+            try {
+                this._initScene();
+                this._initControls();
+                this._initStats();
 
-            this.initGUI();
+                this.initGUI();
 
-            this.historyUpdated();
+                this.historyUpdated();
+            }
+            catch (e) {
+                container.text(e);
+                throw e;
+            }
         },
 
         /* To Override */
@@ -48,10 +54,18 @@ Cerebro2.AbstractVisualization = Fiber.extend(function() {
         /* Public */
 
         initRenderer: function() {
-            var renderer = new THREE.WebGLRenderer({
-                // NOTE: uncomment below enable screenshots
-                // preserveDrawingBuffer: true
-            });
+            try {
+                var renderer = new THREE.WebGLRenderer({
+                    // NOTE: uncomment below enable screenshots
+                    // preserveDrawingBuffer: true
+                });
+            }
+            catch (e) {
+                // three.js doesn't throw an informative error message.
+                // It just dereferences null.
+                throw ("Failed to create WebGLRenderer.");
+            }
+
             THREEx.Screenshot.bindKey(renderer);
             return renderer;
         },
