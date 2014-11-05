@@ -10,10 +10,17 @@
 
     var model = new Cerebro2.NetworkReadonlyModel(modelURL),
         history = new Cerebro2.History(),
-        visualization = new Cerebro2.FakeGeospatialCoordinateEncoderVisualization(container, history, encoderName);
+        historyConsumers = [];
 
-    visualization.loadDelay = loadDelay;
-    visualization.render();
+    try {
+        var visualization = new Cerebro2.FakeGeospatialCoordinateEncoderVisualization(container, history, encoderName);
+        visualization.loadDelay = loadDelay;
+        visualization.render();
+        historyConsumers.push(visualization);
+    }
+    catch (e) {
+        container.text(e);
+    }
 
     runModel();
 
@@ -25,7 +32,9 @@
 
             if (snapshot) {
                 history.addSnapshot(snapshot);
-                visualization.historyUpdated();
+                historyConsumers.forEach(
+                    function (consumer) { consumer.historyUpdated(); }
+                );
 
                 delay = 0;
             }
