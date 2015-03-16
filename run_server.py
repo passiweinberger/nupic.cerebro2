@@ -4,8 +4,36 @@ import sys
 import webbrowser
 """
 ## Usage
-Patch your CLA-Model and run it. (See README in the nupic.cerebro2.server folder)
-Then, type: './run_server.py <portNumber>'
+
+First, patch your model:
+
+    // Assuming `model` is a CLA model you already have
+    from cerebro2.patcher import Patcher
+    Patcher().patchCLAModel(model)
+
+You can also patch an SP or a TP directly:
+
+    // Assuming `sp` and `tp` are already defined
+    from cerebro2.patcher import Patcher
+    Patcher().patchSP(sp)
+    Patcher().patchTP(tp)
+
+Then, after the model / SP / TP has through a number of iterations:
+
+    python server.py
+
+------------------------------------
+
+Set up [cerebro2.server](https://github.com/numenta/nupic.cerebro2.server) to export your model state.
+
+Then, run:
+
+    cd static
+    python -m SimpleHTTPServer 8000
+
+Finally, visit the following URL in your browser:
+
+    http://localhost:8000
 
 ### Screenshots
 
@@ -31,7 +59,8 @@ DESCRIPTION = ("This is to set up a Cerebro2 server and open it in your browser.
     		"Patcher().patchTP(tp)\n"
 
 		"This scripc also assumes that you have the 'nupic.cerebro2.server' folder inside this directory!\n"
-		"For further information read the READMEs in these two folders!\n")
+		"For further information read the READMEs in these two folders!\n"
+		"If last lines for Exit Cmd uncommented: Press C-c to kill all the processes. (Caution: executes 'killall python' !!)\n")
 
 		
 def server_setup(StartDir):
@@ -42,25 +71,24 @@ def server_setup(StartDir):
     else:
       os.chdir(ServerDir)
       print "Server is being set up...\n"
-      os.spawnl(os.P_NOWAIT, "python server.py")
-      #os.system("python server.py") 
+      
+      os.system("gnome-terminal -e 'python server.py'")
 
 
 def server_call(StartDir, port):
     StaticDir = os.path.join(StartDir, 'static')
     os.chdir(StaticDir)
-    print "Calling the server at port number %s" % port
-    command = "python -m SimpleHTTPServer " + str(port)
-    os.spawnl(os.P_NOWAIT, command)
-    #os.system(command)
+    print "Calling the server at port number %s" % port 
+    command = "python -m SimpleHTTPServer " + str(port)    
+    os.system("gnome-terminal -e '%s'" % command)
     print "Server is up and running at port %s!\n" % port
 
 
 def open_browser(port):
     print "Opening port %s in your default Browser..." % port 
+    
     url = "http://localhost:%d" % int(port)
     os.spawnl(os.P_NOWAIT, webbrowser.open_new_tab(url))
-    #webbrowser.open_new_tab(url)
 
 
 
@@ -77,4 +105,9 @@ if __name__ == "__main__":
     server_call(StartDir, port) 
     #Opening the browser at the port:
     open_browser(port)
+
+    #Exit command:
+    #if KeyboardInterrupt:
+    #	os.system("gnome-terminal -e 'killall python'")
+	
 
