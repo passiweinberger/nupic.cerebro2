@@ -3,6 +3,7 @@
 import os
 import sys
 import webbrowser
+import subprocess
 """
 ## Usage
 Make sure the 'nupic.cerebro2.server directory' is extracted in here and all requirements are installed. 
@@ -66,7 +67,7 @@ def server_setup(StartDir):
     else:
       os.chdir(ServerDir)
       print "Server is being set up...\n"
-      os.system("gnome-terminal -e 'python server.py'")
+      subprocess.Popen(["python", "server.py"])
 
 
 def server_call(StartDir, port):
@@ -74,7 +75,7 @@ def server_call(StartDir, port):
     os.chdir(StaticDir)
     print "Calling the server at port number %s" % port 
     command = "python -m SimpleHTTPServer " + str(port)    
-    os.system("gnome-terminal -e '%s'" % command)
+    subprocess.Popen(["python", "-m", "SimpleHTTPServer", port])    
     print "Server is up and running at port %s!\n" % port
 
 
