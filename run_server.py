@@ -13,7 +13,7 @@ First, patch your model:
 
     // Assuming `model` is a HTM model you already have
     from cerebro2.patcher import Patcher
-    Patcher().patchHTMModel(model)
+    Patcher().patchCLAModel(model)
 
 You can also patch an SP or a TP directly:
 
