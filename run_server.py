@@ -11,9 +11,9 @@ Make sure the 'nupic.cerebro2.server directory' is extracted in here and all req
 
 First, patch your model:
 
-    // Assuming `model` is a CLA model you already have
+    // Assuming `model` is a HTM model you already have
     from cerebro2.patcher import Patcher
-    Patcher().patchCLAModel(model)
+    Patcher().patchHTMModel(model)
 
 You can also patch an SP or a TP directly:
 
@@ -72,7 +72,6 @@ def serverCall(startDir, port):
     staticDir = os.path.join(startDir, 'static')
     os.chdir(staticDir)
     print "Calling the server at port number %s" % port 
-    command = "python -m SimpleHTTPServer " + str(port)    
     subprocess.Popen(["python", "-m", "SimpleHTTPServer", port])    
     print "Server is up and running at port %s!\n" % port
 
