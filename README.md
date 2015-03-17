@@ -4,16 +4,27 @@ A web-based visualization and debugging platform for NuPIC.
 
 ## Usage
 
-Set up [cerebro2.server](https://github.com/numenta/nupic.cerebro2.server) to export your model state.
+Make sure the 'nupic.cerebro2.server directory' is extracted in here and all requirements are installed. 
+(Further information : see the READMEs)
+
+First, patch your model:
+
+    // Assuming `model` is a HTM model you already have
+    from cerebro2.patcher import Patcher
+    Patcher().patchHTMModel(model)
+
+You can also patch an SP or a TP directly:
+
+    // Assuming `sp` and `tp` are already defined
+    from cerebro2.patcher import Patcher
+    Patcher().patchSP(sp)
+    Patcher().patchTP(tp)
+
+Then, after the model / SP / TP has through a number of iterations:
 
 Then, run:
 
-    cd static
-    python -m SimpleHTTPServer 8000
-
-Finally, visit the following URL in your browser:
-
-    http://localhost:8000
+    ./run_server <PortNumber>
 
 ### Screenshots
 
