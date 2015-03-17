@@ -6,19 +6,16 @@ A web-based visualization and debugging platform for NuPIC.
 
 Set up cerebro2.server to export your model state.
 
-Then, un:
+Then, run:
 
-cd static
-python -m SimpleHTTPServer 8000
+    cd static
+    python -m SimpleHTTPServer 8000
 Finally, visit the following URL in your browser:
 
-http://localhost:8000
-
-
-Quicker Solution: 
+    http://localhost:8000
+ 
+### Quicker Solution: 
 Make sure the 'nupic.cerebro2.server directory' is extracted in here and all requirements are installed. 
-(Further information : see the READMEs)
-
 First, patch your model:
 
     // Assuming `model` is a HTM model you already have
