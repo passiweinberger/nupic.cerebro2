@@ -66,11 +66,8 @@ if __name__ == "__main__":
     print DESCRIPTION
     startDir = os.getcwd()
     port = sys.argv[1]
-    # Setting up the server in nupic.cerebro2.server module:
     serverSetup(startDir)
-    # Calling the server for the provided port:
     serverCall(startDir, port) 
-    # Opening the browser at the port:
     openBrowser(port)
 
     # Exit command:
