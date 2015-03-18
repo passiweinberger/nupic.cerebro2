@@ -18,4 +18,5 @@ Finally, visit the following URL in your browser:
 
 To enable taking screenshots with the `p` keyboard shortcut, open `js/classes/abstract_visualization.js` and uncomment the line under the note about screenshots.
 
-### Quicker Solution can be found in run_server.py
+### Quicker Setup 
+See 'run_server.py' for a quicker setup.
